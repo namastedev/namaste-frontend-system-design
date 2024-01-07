@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch with CORS Example</title>
+</head>
+<body>
+    <h1>Fetch with CORS Example</h1>
+    <button onclick="fetchData()">Fetch Data</button>
+    <div id="result"></div>
+
+    <script>
+        function fetchData() {
+            fetch('http://localhost:5010/list', {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the fetched data
+                document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

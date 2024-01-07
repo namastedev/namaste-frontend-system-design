@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Malicious iframe</title>
+</head>
+<body>
+    <h1>Malicious iframe</h1>
+    <p>This iframe attempts to steal data from the parent window.</p>
+    
+    <script>
+        window.alert('Hi');
+        // Malicious JavaScript code in the iframe
+        window.onload = function () {
+            try {
+                const parentWindow = window.parent;
+                const parentDocument = parentWindow.document;
+
+                // Attempt to read html
+                const stolenData = parentDocument.innerHtml;
+                alert("Stolen Data: " + stolenData);
+            } catch (error) {
+                console.error("Data theft failed:", error);
+            }
+        };
+    </script>
+</body>
+</html>
