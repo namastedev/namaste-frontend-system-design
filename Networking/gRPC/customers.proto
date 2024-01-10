@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+service CustomerService {
+    rpc GetAll (Empty) returns (CustomerList) {}
+    rpc Get (CustomerRequestId) returns (Customer) {}
+    rpc Insert (Customer) returns (Customer) {}
+    rpc Update (Customer) returns (Customer) {}
+    rpc Remove (CustomerRequestId) returns (Empty) {}
+}
+
+message Empty {}
+
+message CustomerRequestId {
+    string id = 1;
+}
+
+message CustomerList {
+    repeated Customer customers = 1;
+}
+
+message Customer {
+    string id = 1;
+    string name = 2;
+    int32 age = 3;
+    string address = 4;
+}
