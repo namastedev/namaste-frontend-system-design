@@ -16,3 +16,14 @@
 - Feature Policy | Permissions-Policy
 - Subresource Integrity (SRI)
 - Cross-Origin Resource Sharing (CORS)
+
+
+# Testing
+-  Unit Testing & Integration Testing
+    - Component Testing
+    - Jest & JS DOM
+    - Testing Library / React Testing Library
+- Automation Testing
+    - e2e Test cases
+    - Tools - Puppeteer , Cypress, Selenium
+    
