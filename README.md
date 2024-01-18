@@ -26,4 +26,9 @@
 - Automation Testing
     - e2e Test cases
     - Tools - Puppeteer , Cypress, Selenium
-    
+ - A/B Testing
+    - Split Testing / Bucket Testing
+ - Performance Testing
+    - Lighthouse
+ - Test Driven Development
+    - Red - Green - Refactor
