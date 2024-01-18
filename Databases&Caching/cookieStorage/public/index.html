@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Recommendation App</title>
+</head>
+<body>
+    <h1>Welcome to the Recommendation App!</h1>
+
+    <div id="preferences-container">
+        <h2>Set Your Preferences</h2>
+        <form id="preferences-form">
+            <label for="preferences">Choose your preferences:</label>
+            <select id="preferences" name="preferences">
+                <option value="movies">Movies</option>
+                <option value="books">Books</option>
+                <option value="music">Music</option>
+            </select>
+            <button type="button" onclick="setPreferences()">Set Preferences</button>
+        </form>
+    </div>
+
+    <div id="recommendations-container" style="display:none;">
+        <h2>Personalized Recommendations</h2>
+        <p id="recommendations"></p>
+        <button onclick="logoutUser()">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

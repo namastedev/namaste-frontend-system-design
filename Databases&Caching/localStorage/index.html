@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark/Light Mode Toggle</title>
+    <style>
+        body {
+            transition: background-color 0.5s;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Define styles for dark mode */
+        body.dark {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Define styles for light mode (default) */
+        body.light {
+            background-color: #fff;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dark/Light Mode Toggle</h1>
+        <button onclick="toggleMode()">Toggle Mode</button>
+    </div>
+
+    <script>
+        // Function to toggle between dark and light modes
+        function toggleMode() {
+            const body = document.body;
+
+            const currentMode = localStorage.getItem('mode');
+
+            // Toggle between dark and light modes
+            const newMode = currentMode === 'dark' ? 'light' : 'dark';
+
+            // Update the body class and store the mode in localStorage
+            body.classList.remove(currentMode);
+            body.classList.add(newMode);
+            localStorage.setItem('mode', newMode);
+
+        }
+
+        // Check and set the mode on page load
+        function checkMode() {
+            const body = document.body;
+            const savedMode = localStorage.getItem('mode') || 'light';
+            body.classList.add(savedMode);
+        }
+
+        // Run checkMode on page load
+        checkMode();
+    </script>
+</body>
+</html>

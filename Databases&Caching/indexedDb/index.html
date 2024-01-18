@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App with IndexedDB</title>
+  <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+</head>
+<body>
+
+  <h1>Todo App</h1>
+
+  <form id="todoForm">
+    <input type="text" id="todoInput" placeholder="Add a new task" required>
+    <button type="submit">Add Task</button>
+  </form>
+
+  <ul id="todoList"></ul>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const db = new Dexie('todoDB');
+      db.version(1).stores({ todos: '++id,task' });
+
+      const todoForm = document.getElementById('todoForm');
+      const todoInput = document.getElementById('todoInput');
+      const todoList = document.getElementById('todoList');
+
+      function addTodo() {
+        db.todos.add({ task: todoInput.value }).then(displayTodos);
+        todoInput.value = '';
+      }
+
+      function displayTodos() {
+        db.todos.toArray().then(todos => {
+          while (todoList.firstChild) {
+            todoList.removeChild(todoList.firstChild);
+          }
+
+          todos.forEach(todo => {
+            const listItem = document.createElement('li');
+            listItem.textContent = todo.task;
+            todoList.appendChild(listItem);
+          });
+        });
+      }
+
+      todoForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        addTodo();
+      });
+
+      // Initial display
+      displayTodos();
+    });
+  </script>
+
+</body>
+</html>

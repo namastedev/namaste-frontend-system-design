@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Caching Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>HTTP Caching Demo</h1>
+        <p>This demo showcases HTTP caching using the Cache-Control header.</p>
+
+        <h2>Image with Cache-Control</h2>
+        <p>This image will be cached based on the Cache-Control header.</p>
+        <img src="image.gif" alt="Cached Image" id="cachedImage">
+
+        <h2>Fetch New Image</h2>
+        <p>Click the button to fetch a new image without using the cache.</p>
+        <button onclick="fetchNewImage()">Fetch New Image</button>
+    </div>
+
+    <script>
+        function fetchNewImage() {
+            // Generate a random query parameter to bypass caching
+            const randomQuery = Math.random().toString(36).substring(7);
+            
+            // Update the image source with the new query parameter
+            const imgElement = document.getElementById('cachedImage');
+            imgElement.src = `image.gif?${randomQuery}`;
+        }
+    </script>
+</body>
+</html>
