@@ -1,0 +1,103 @@
+<!-- Tab trapping -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Modal Example</title>
+  <style>
+    /* Styles for the modal and overlay */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #000;
+      z-index: 1000;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 900;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="openModal()">Open Modal</button>
+
+<div id="overlay" tabindex="-1" aria-hidden="true" onclick="closeModal()"></div>
+
+<div id="modal" tabindex="0">
+  <h2>Modal Content</h2>
+  <p>This is a sample modal content.</p>
+  <button onclick="closeModal()">Close Modal</button>
+  <button onclick="closeModal()">Save</button>
+</div>
+
+<script>
+  const modal = document.getElementById('modal');
+  const overlay = document.getElementById('overlay');
+  let lastFocusedElement = null;
+
+  function openModal() {
+    // Save the currently focused element before opening the modal
+    lastFocusedElement = document.activeElement;
+
+    // Display the modal and overlay
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+
+    // Set focus to the modal
+    modal.focus();
+  }
+
+  function closeModal() {
+    // Hide the modal and overlay
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+
+    // Restore focus to the last focused element
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+  }
+
+  // Trap focus within the modal
+  modal.addEventListener('keydown', function (e) {
+    const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+    if (isTabPressed) {
+      // Check if the last focusable element is focused
+      if (e.shiftKey) {
+        // Shift + Tab: Check if focus is on the first focusable element
+        if (document.activeElement === modal) {
+          e.preventDefault();
+          modal.focus(); // Move focus to the last focusable element
+        }
+      } else {
+        // Tab: Check if focus is on the last focusable element
+        const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          modal.focus(); // Move focus to the first focusable element
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

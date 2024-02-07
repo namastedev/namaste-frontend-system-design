@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @charset "UTF-8";
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Nunito Sans", sans-serif;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #ffffff;
+        width: 90%;
+        height: 100%;
+        min-height: 120vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 30px;
+        margin: 1rem 2rem 2rem;
+      }
+      body :focus {
+        outline: none;
+      }
+      body :placeholder {
+        color: #767676;
+      }
+      body .header {
+        width: 60%;
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      body .header .header-logo {
+        margin-left: -2rem;
+      }
+      body .header .header-logo a {
+        float: left;
+      }
+      body .header .club-name {
+        float: left;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-left: 1rem;
+        font-weight: 700;
+        color: #01aa9d;
+      }
+      body .header .nav {
+        margin-top: -1rem;
+      }
+      body .header .nav .ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        column-gap: 18px;
+      }
+      body .header .nav .ul li a {
+        text-decoration: none;
+        color: #7c7c7c;
+        font-weight: 700;
+      }
+      body .header .nav .ul li:last-of-type a {
+        background: #01aa9d;
+        color: #ffffff;
+        padding: 15px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      body .header .mobile-nav-btn {
+        display: none;
+        cursor: pointer;
+      }
+      body .main {
+        width: 60%;
+        height: 80%;
+      }
+      body .main .home {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        column-gap: 50px;
+      }
+      body .main .home .section-left {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+      }
+      body .main .home .section-left p.bullet {
+        margin-left: 1rem;
+        margin-top: -1rem;
+        text-align: justify;
+        font-size: 0.9rem;
+      }
+      body .main .home .section-left p.bullet a {
+        color: #7c7c7c;
+        text-decoration: none;
+      }
+      body .main .home .section-left p.bullet:before {
+        content: "■ ";
+        position: relative;
+        color: #666666;
+        list-style-type: circle;
+        margin-left: -0.8rem;
+      }
+      body .main .home .section-left .label-header {
+        background: #01aa9d;
+        padding: 8px 25px;
+        border-radius: 20px;
+        width: fit-content;
+      }
+      body .main .home .section-left .label-header p {
+        color: #ffffff;
+      }
+      body .main .home .section-left p {
+        color: #7c7c7c;
+      }
+      body .main .home .section-left .h1 {
+        font-size: 40px;
+        color: #555555;
+        font-weight: 900;
+      }
+      body .main .home .section-left .h2 {
+        font-size: 20px;
+        color: #555555;
+        font-weight: 900;
+      }
+      body .main .home .section-left form .form-group {
+        display: flex;
+        column-gap: 10px;
+      }
+      body .main .home .section-left form .form-group input {
+        background: #ffffff;
+        padding: 10px 15px;
+        width: 230px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+      }
+      body .main .home .section-left form .form-group button {
+        background: #01aa9d;
+        color: #ffffff;
+        padding: 15px;
+        border: 0;
+        border-radius: 5px;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      body .main .home .section-right {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      body .main .home .section-right svg {
+        width: 50%;
+        position: absolute;
+        top: 200px;
+        left: 48%;
+        transform: scaleX(-1);
+      }
+      body .main .social {
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+      }
+      body .main .social .ul {
+        list-style-type: none;
+        display: flex;
+        column-gap: 12px;
+        justify-content: left;
+      }
+      body .main .social .ul li a svg {
+        width: 30px;
+        fill: #dedfe7;
+      }
+      body .footer {
+        height: 10%;
+        width: 60%;
+        display: grid;
+        place-items: center;
+      }
+      body .footer p {
+        font-size: 14px;
+        font-weight: 900;
+      }
+      body .footer p a {
+        color: #372865;
+      }
+      body #mobile-nav {
+        background-color: #01aa9d;
+        width: 60%;
+        margin: 0px auto;
+        display: none;
+      }
+      body #mobile-nav .nav {
+        width: 100%;
+        padding: 20px 0px;
+      }
+      body #mobile-nav .nav .ul {
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        row-gap: 5px;
+      }
+      body #mobile-nav .nav .ul li {
+        width: 100%;
+        padding: 10px;
+      }
+      body #mobile-nav .nav .ul li a {
+        display: block;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+      }
+      body #mobile-nav .nav .ul li a:hover {
+        color: black;
+      }
+      body #mobile-nav.active {
+        display: none;
+      }
+
+      @media screen and (max-width: 1400px) {
+        body .header {
+          width: 75%;
+          height: 20%;
+        }
+        body .main {
+          width: 75%;
+          height: 70%;
+        }
+        body .footer {
+          height: 10%;
+          width: 75%;
+        }
+      }
+      @media screen and (max-width: 1200px) {
+        body .header {
+          width: 90%;
+          height: 20%;
+        }
+        body .main {
+          width: 90%;
+          height: 70%;
+        }
+        body .footer {
+          height: 10%;
+          width: 90%;
+        }
+      }
+      @media screen and (max-width: 1024px) {
+        body {
+          height: auto;
+        }
+        body .header {
+          width: 90%;
+          height: 50px;
+        }
+        body .header .nav {
+          display: none;
+        }
+        body .header .mobile-nav-btn {
+          display: block;
+        }
+        body .main {
+          width: 90%;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          row-gap: 50px;
+        }
+        body .main .social {
+          width: 100%;
+          align-items: center;
+        }
+        body .main .home .section-left {
+          width: 100%;
+          align-items: center;
+          row-gap: 35px;
+        }
+        body .main .home .section-left h1 {
+          text-align: center;
+        }
+        body .main .home .section-left p {
+          text-align: center;
+        }
+        body .main .home .section-right {
+          display: none;
+        }
+        body .footer {
+          height: 40px;
+          width: 90%;
+          margin-bottom: 20px;
+        }
+        body #mobile-nav {
+          width: 90%;
+        }
+        body #mobile-nav.active {
+          display: block;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        body {
+          height: auto;
+        }
+        body .header {
+          width: 90%;
+          height: 50px;
+          margin-top: 40px;
+        }
+        body .header .nav {
+          display: none;
+        }
+        body .header .mobile-nav-btn {
+          display: block;
+        }
+        body .main {
+          width: 90%;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          row-gap: 50px;
+        }
+        body .main .home .section-left {
+          width: 100%;
+          align-items: center;
+          row-gap: 35px;
+        }
+        body .main .home .section-left h1 {
+          text-align: center;
+        }
+        body .main .home .section-left p {
+          text-align: center;
+        }
+        body .main .home .section-left form {
+          width: 100%;
+        }
+        body .main .home .section-left form .form-group {
+          width: 100%;
+          flex-direction: column;
+          row-gap: 15px;
+        }
+        body .main .home .section-left form .form-group input,
+        body .main .home .section-left form .form-group button {
+          width: 100%;
+        }
+        body .main .home .section-right {
+          display: none;
+        }
+        body .footer {
+          height: 40px;
+          width: 90%;
+          margin-bottom: 20px;
+        }
+        body #mobile-nav {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-logo">
+        <a href="index.html"
+          ><img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ph%C3%B2ng_tr%C3%A1nh_%C4%91%E1%BA%A1i_d%E1%BB%8Bch.svg/100px-Ph%C3%B2ng_tr%C3%A1nh_%C4%91%E1%BA%A1i_d%E1%BB%8Bch.svg.png"
+        /></a>
+        <div class="club-name">Medical Mysteries Club</div>
+      </div>
+      <div class="nav">
+        <div class="ul">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Q&A</a></li>
+          <li><a href="#">Subscribe</a></li>
+        </div>
+      </div>
+      <div id="mobile-nav-btn" class="mobile-nav-btn">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hamburger_icon.svg"
+        />
+      </div>
+    </div>
+
+    <div id="mobile-nav">
+      <div class="nav">
+        <div class="ul">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Q&A</a></li>
+          <li><a href="#">Subscribe</a></li>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="home">
+        <div class="section-left">
+          <p class="h1">Join the Club</p>
+          <p>
+            Subscribe to our e-newsletter and have medical mysteries delivered
+            to your inbox! You will learn about all types of topics,
+            including...
+          </p>
+          <p class="h2">Rare Medical Conditions</p>
+          <p><b>Mermaid syndrome</b></p>
+          <p class="bullet">
+            <a href="https://rarediseases.org/rare-diseases/sirenomelia"
+              >Sirenomelia</a
+            >, also known as mermaid syndrome, is an extremely rare congenital
+            developmental disorder characterized by anomalies of the lower spine
+            and the lower limbs. Affected infants are born with partial or
+            complete fusion of the legs. Most newborns don’t survive for long
+            with this anomaly, but some children defy the odds.
+          </p>
+          <p><b>Maple syrup urine disease</b></p>
+          <p class="bullet">
+            <a
+              href="https://rarediseases.org/rare-diseases/maple-syrup-urine-disease"
+              >Maple syrup urine disease (MSUD)</a
+            >
+            is a rare genetic disorder characterized by a deficiency of an
+            enzyme that is required to break down the amino acids leucine,
+            isoleucine, and valine. MSUD is unique in its characteristic odor,
+            reminiscent of maple syrup, which can be detected in the urine and
+            earwax within a day or two of birth.
+          </p>
+          <p><b>Klinefelter syndrome</b></p>
+          <p class="bullet">
+            <a
+              href="https://rarediseases.org/rare-diseases/47-xxy-klinefelter-syndrome"
+              >Klinefelter syndrome</a
+            >
+            is a chromosomal variation in males in which one extra X chromosome
+            is present. The extra X chromosome typically affects physical,
+            neurodevelopmental, behavioral, and neurocognitive functioning. It
+            is believed that the founding father of the United States, George
+            Washington, was unable to have children due to Klinefelter syndrome.
+          </p>
+          <form>
+            <div class="form-group">
+              <input
+                type="email"
+                placeholder="Enter your e-mail address"
+                aria-hidden="true"
+                tabindex="-1"
+                required
+              />
+              <button role="list" type="submit" tabindex="1">Subscribe</button>
+            </div>
+          </form>
+          <div class="social">
+            <div class="ul">
+              <li>
+                <a href="#"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z"
+                    /></svg></a>
+              </li>
+
+              <li>
+                <a href="#"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M40.1 32L10 108.9v314.3h107V480h60.2l56.8-56.8h87l117-117V32H40.1zm357.8 254.1L331 353H224l-56.8 56.8V353H76.9V72.1h321v214zM331 149v116.9h-40.1V149H331zm-107 0v116.9h-40.1V149H224z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="#"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-prefix="fab"
+                    data-icon="instagram-square"
+                    class="svg-inline--fa fa-instagram-square fa-w-14"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"
+                    /></svg></a>
+              </li>
+            </div>
+          </div>
+        </div>
+        <div class="section-right">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            id="Layer_1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 1920 1080"
+            style="enable-background: new 0 0 1920 1080"
+            xml:space="preserve"
+          >
+            <style type="text/css">
+              .st0 {
+                fill: #cccccc;
+              }
+
+              .st1 {
+                fill: none;
+                stroke: #cccccc;
+                stroke-width: 20;
+                stroke-miterlimit: 10;
+              }
+
+              .st2 {
+                fill: #4d4d4d;
+              }
+
+              .st3 {
+                fill: #42210b;
+              }
+
+              .st4 {
+                fill: #2a4c66;
+              }
+
+              .st5 {
+                fill: #754c24;
+              }
+
+              .st6 {
+                fill: #603813;
+              }
+
+              .st7 {
+                fill: #1e3947;
+              }
+
+              .st8 {
+                fill: #f8c09d;
+              }
+
+              .st9 {
+                fill: #e6e6e6;
+              }
+
+              .st10 {
+                fill: #f6ae8d;
+              }
+
+              .st11 {
+                fill: #ef937e;
+              }
+
+              .st12 {
+                fill: none;
+                stroke: #ef937e;
+                stroke-width: 2;
+                stroke-linecap: round;
+                stroke-miterlimit: 10;
+              }
+
+              .st13 {
+                fill: none;
+                stroke: #e6e6e6;
+                stroke-width: 8;
+                stroke-miterlimit: 10;
+              }
+
+              .st14 {
+                fill: none;
+                stroke: #808080;
+                stroke-width: 3;
+                stroke-miterlimit: 10;
+              }
+
+              .st15 {
+                fill: none;
+                stroke: #808080;
+                stroke-width: 3;
+                stroke-linecap: round;
+                stroke-miterlimit: 10;
+              }
+
+              .st16 {
+                fill: #e26c60;
+              }
+
+              .st17 {
+                fill: #333333;
+              }
+
+              .st18 {
+                fill: #af3e1b;
+              }
+
+              .st19 {
+                fill: none;
+                stroke: #cccccc;
+                stroke-width: 5;
+                stroke-miterlimit: 10;
+              }
+
+              .st20 {
+                fill: #0b8274;
+              }
+
+              .st21 {
+                fill: #069385;
+              }
+
+              .st22 {
+                fill: #00a99d;
+              }
+
+              .st23 {
+                fill: #995c29;
+              }
+
+              .st24 {
+                fill: none;
+                stroke: #ef937e;
+                stroke-width: 4.1519;
+                stroke-linecap: round;
+                stroke-miterlimit: 10;
+              }
+            </style>
+            <polygon
+              class="st0"
+              points="1411.1,869.3 1442.7,802 1369.7,812.7 1338.3,880.4 "
+            />
+            <path
+              class="st0"
+              d="M1442.7,802l-73,10.7l-2.2-14.8c-1.2-8,4.4-15.5,12.4-16.7l43.8-6.4c8-1.2,15.5,4.4,16.7,12.4L1442.7,802z"
+            />
+            <g>
+              <path
+                class="st1"
+                d="M1076.2,727l1-259.2c0.1-33.6-27-60.9-60.6-61.1l-13.1,0"
+              />
+              <path
+                class="st1"
+                d="M1076.8,588.8h179.7c22.7,0,41.1,18.4,41.1,41.1v160.5"
+              />
+              <path
+                class="st2"
+                d="M1010.7,421.2h-75.4c-5.6,0-10.1-4.5-10.1-10.1v-7.9c0-5.6,4.5-10.1,10.1-10.1h75.4c5.6,0,10.1,4.5,10.1,10.1   v7.9C1020.8,416.7,1016.2,421.2,1010.7,421.2z"
+              />
+            </g>
+            <rect x="1092.8" y="621.8" class="st3" width="145.8" height="23" />
+            <path
+              class="st3"
+              d="M1352.9,801.4l21.4,34.6l73.5-20.3c0,0-7.7-16.5-27.8-14.7c-20,1.8-33.2,17.2-33.2,17.2l-17.3-21.4  L1352.9,801.4z"
+            />
+            <path
+              class="st4"
+              d="M1097.6,468.8c6.5-60.4,64.8-55.3,64.8-55.3c13.7,0,56.2,15,56.2,56.4v152.2h-126.5  C1092.1,622.1,1091.4,526.4,1097.6,468.8z"
+            />
+            <path
+              class="st5"
+              d="M1334.9,816.4l21.4,34.6l73.5-20.3c0,0-7.7-16.5-27.8-14.7c-20,1.8-33.2,17.2-33.2,17.2l-17.3-21.4  L1334.9,816.4z"
+            />
+            <path
+              class="st3"
+              d="M1105.8,607.6l-1.1,28.6c-0.9,14.1,14.8,27,47.4,23.5h85.1L1342,816.8l44.3-24.3L1290.9,644  c-16.3-27.2-25-39.7-52.1-44.1L1105.8,607.6z"
+            />
+            <path
+              class="st6"
+              d="M1092.1,621.8l-1.1,28.6c-0.9,14.1,14.8,27,47.4,23.5h85.1l104.9,157.1l44.3-24.3l-95.5-148.5  c-16.3-27.2-25-39.7-52.1-44.1L1092.1,621.8z"
+            />
+            <path
+              class="st7"
+              d="M1090.9,599.9L1090.9,599.9c-10-1.9-16.6-11.6-14.6-21.6l23-119.9c1.9-10,11.6-16.6,21.6-14.6v0  c10,1.9,16.6,11.6,14.6,21.6l-23,119.9C1110.6,595.3,1100.9,601.8,1090.9,599.9z"
+            />
+            <path
+              class="st7"
+              d="M1075.7,582.5L1075.7,582.5c0.5-10.2,9.2-18,19.4-17.5l103.6,5.4l-1.9,36.8l-103.6-5.4  C1083,601.4,1075.2,592.7,1075.7,582.5z"
+            />
+            <path
+              class="st8"
+              d="M1196.9,603.1c0,0,7.1-0.8,19.6,1.6c11.1,2.1,18.6,10.6,22.1,11.3c3.4,0.8,8.1-0.7,3-8.1  c-6-8.5-16.8-7.7-12.4-6.5c4.4,1.2,9,3.5,12.8,9.2c3.8,5.7,9.9,9,11.7,3.8s-2.6-8.1-2.6-8.1s5.8,2.4,7.1-2c1.2-4.4-2.8-10-5.4-12.7  c0,0,3-4.6-2.7-7.6s-14.8-9.7-21.5-12.1c-6.7-2.4-29.9,7.2-29.9,7.2L1196.9,603.1z"
+            />
+            <path
+              class="st9"
+              d="M1261.4,315c0-27.9-0.6-60.2-35.9-80.5c-48.6-28.1-84.9,8-84.9,8s-25.4-2.5-40.9,28.6  c-13.1,26.2-7.9,45.7-5.6,57.4c7,36.2,38.8,69.4,84.5,69.4S1261.4,360.7,1261.4,315z"
+            />
+            <path
+              class="st10"
+              d="M1202.4,421.7c0-14.4-5.7-28.1-20.1-28.1s-22.8,11.7-22.8,26.1s8.4,26.1,22.8,26.1S1202.4,436.1,1202.4,421.7z  "
+            />
+            <path
+              class="st8"
+              d="M1187,427.6c-29-6.7-68.3-32.1-68.3-79.7v-46.2c0-16.9,13.7-30.6,30.6-30.6h75.3c16.9,0,30.6,13.7,30.6,30.6  v57.5c0,18.9-5.7,42-23,57C1218.2,428.3,1200.1,430.6,1187,427.6z"
+            />
+            <circle class="st8" cx="1118.3" cy="328.4" r="19.4" />
+            <path
+              class="st11"
+              d="M1114.4,331.2c0-3.8,3.1-6.9,6.9-6.9c1,0,2,0.2,2.9,0.7c-1.2-2-3.4-3.4-5.9-3.4c-3.8,0-6.9,3.1-6.9,6.9  c0,2.8,1.6,5.1,4,6.2C1114.7,333.6,1114.4,332.4,1114.4,331.2z"
+            />
+            <path
+              class="st9"
+              d="M1255.2,293.7c0,0-15.2-18.9-40-18.9c-24.8,0-49.4,6.8-49.4,6.8s-18.9,34.2-31.4,36  c-17.3,2.4-16.1-8.6-16.1-8.6l-0.1-48l124,9.1L1255.2,293.7z"
+            />
+            <line class="st12" x1="1232" y1="292" x2="1198" y2="292" />
+            <line class="st12" x1="1238" y1="302" x2="1192" y2="302" />
+            <path
+              class="st13"
+              d="M1252.4,319.8c0,0-5.3-1.5-8.3-1.5c-6.4,0-10.4,2.4-10.4,2.4"
+            />
+            <path
+              class="st13"
+              d="M1202.4,319.8c0,0-5.3-1.5-8.3-1.5c-6.4,0-10.4,2.4-10.4,2.4"
+            />
+            <path
+              class="st14"
+              d="M1197.4,344.5h-10.6c-8.3,0-15.1-6.8-15.1-15.1v0c0-8.3,6.8-15.1,15.1-15.1h10.6c8.3,0,15.1,6.8,15.1,15.1v0  C1212.5,337.7,1205.7,344.5,1197.4,344.5z"
+            />
+            <path
+              class="st14"
+              d="M1244.1,344.5h-10.6c-8.3,0-15.1-6.8-15.1-15.1v0c0-8.3,6.8-15.1,15.1-15.1h10.6c8.3,0,15.1,6.8,15.1,15.1v0  C1259.2,337.7,1252.5,344.5,1244.1,344.5z"
+            />
+            <line class="st14" x1="1210.8" y1="329.4" x2="1218.5" y2="329.6" />
+            <path
+              class="st15"
+              d="M1122,318.5c0,0,4.1,0,15.5,0c10.7,0,32.9,11.3,32.9,11.3"
+            />
+            <path
+              class="st16"
+              d="M1232,379.2c0,5.9-4.8,10.1-10.7,10.1l0,0c-5.9,0-10.7-4.2-10.7-10.1"
+            />
+            <path
+              class="st9"
+              d="M1242.7,376.8c0.2-1.8-0.7-3.5-2.4-4.2c-3.1-1.3-17-4.9-17-4.9s-16.7,2.7-20.3,3.9c-1.6,0.5-2.7,1.9-2.8,3.6  l-0.3,5.3c-0.2,2.6,2.2,4.7,4.8,4.2c5-1,18.6-3.7,18.6-3.7s9.9,2.7,13.5,3.9c2.4,0.8,4.9-0.8,5.3-3.3L1242.7,376.8z"
+            />
+            <path
+              class="st11"
+              d="M1219.8,348.6v13.2c0,0.6,0.7,1.1,1.3,1.1h7.8c2.1,0,3.3-2.5,1.9-4.1l-9-10.8  C1221.2,347.1,1219.8,347.6,1219.8,348.6z"
+            />
+            <ellipse class="st17" cx="1244.7" cy="331.3" rx="3.7" ry="6.5" />
+            <ellipse class="st17" cx="1194.2" cy="331.3" rx="3.7" ry="6.5" />
+            <g>
+              <path
+                class="st1"
+                d="M1028,774V500.7c0-33.6-27.2-60.9-60.9-60.9H954"
+              />
+              <path
+                class="st2"
+                d="M962.7,454.3h-75.4c-5.6,0-10.1-4.5-10.1-10.1v-7.9c0-5.6,4.5-10.1,10.1-10.1h75.4c5.6,0,10.1,4.5,10.1,10.1   v7.9C972.8,449.8,968.3,454.3,962.7,454.3z"
+              />
+              <path
+                class="st18"
+                d="M1248.8,725.1h-210.4v-51.3h188.9c11.9,0,21.5,9.6,21.5,21.5V725.1z"
+              />
+              <path
+                class="st1"
+                d="M1028,734h209.4c12.7,0,24.7,6.3,31.9,16.7l76.4,122.9"
+              />
+              <path
+                class="st0"
+                d="M1411.3,869.7l-73,10.7l-2.2-14.8c-1.2-8,4.4-15.5,12.4-16.7l43.8-6.4c8-1.2,15.5,4.4,16.7,12.4L1411.3,869.7z   "
+              />
+              <path
+                class="st18"
+                d="M1091.3,723.9h-52.9V492.2h7.7c25,0,45.2,20.2,45.2,45.2V723.9z"
+              />
+              <path
+                class="st1"
+                d="M1028,608h179.7c22.7,0,41.1,18.4,41.1,41.1v193.1"
+              />
+            </g>
+            <g>
+              <path
+                class="st17"
+                d="M1028.3,619.3C942.5,619.3,873,688.6,873,774s69.5,154.7,155.3,154.7s155.3-69.2,155.3-154.7   S1114.1,619.3,1028.3,619.3z M1028.3,908.7c-74.7,0-135.2-60.3-135.2-134.7c0-74.4,60.6-134.7,135.2-134.7   c74.7,0,135.2,60.3,135.2,134.7C1163.6,848.4,1103,908.7,1028.3,908.7z"
+              />
+              <line class="st19" x1="1143.8" y1="724" x2="913.2" y2="823" />
+              <line class="st19" x1="1078" y1="888.8" x2="979" y2="658.2" />
+              <line class="st19" x1="982" y1="890.1" x2="1075" y2="656.9" />
+              <line class="st19" x1="911.9" y1="727" x2="1145.1" y2="820" />
+              <path
+                class="st0"
+                d="M1028.3,636.7c-76.2,0-137.9,61.5-137.9,137.3s61.8,137.3,137.9,137.3c76.2,0,137.9-61.5,137.9-137.3   S1104.5,636.7,1028.3,636.7z M1028.3,893.6C962,893.6,908.2,840,908.2,774c0-66,53.8-119.6,120.1-119.6   c66.3,0,120.1,53.5,120.1,119.6C1148.4,840,1094.7,893.6,1028.3,893.6z"
+              />
+              <circle class="st0" cx="1028.3" cy="774" r="31.7" />
+              <circle class="st17" cx="1028.3" cy="774" r="16.4" />
+            </g>
+            <g>
+              <path
+                class="st17"
+                d="M1248.3,836.8c-25.6,0-46.4,20.7-46.4,46.2s20.8,46.2,46.4,46.2c25.6,0,46.4-20.7,46.4-46.2   S1273.9,836.8,1248.3,836.8z M1248.3,919.4c-20.2,0-36.6-16.3-36.6-36.4c0-20.1,16.4-36.4,36.6-36.4s36.6,16.3,36.6,36.4   C1284.9,903.1,1268.5,919.4,1248.3,919.4z"
+              />
+              <line
+                class="st19"
+                x1="1279.6"
+                y1="869.5"
+                x2="1217.2"
+                y2="896.3"
+              />
+              <line class="st19" x1="1261.8" y1="914.1" x2="1235" y2="851.7" />
+              <line class="st19" x1="1235.8" y1="914.4" x2="1261" y2="851.3" />
+              <line
+                class="st19"
+                x1="1216.9"
+                y1="870.3"
+                x2="1279.9"
+                y2="895.5"
+              />
+              <path
+                class="st0"
+                d="M1248.3,845.9c-20.6,0-37.3,16.6-37.3,37.1c0,20.5,16.7,37.1,37.3,37.1s37.3-16.6,37.3-37.1   C1285.6,862.5,1268.9,845.9,1248.3,845.9z M1248.3,915.3c-17.9,0-32.5-14.5-32.5-32.3c0-17.9,14.5-32.3,32.5-32.3   s32.5,14.5,32.5,32.3C1280.8,900.9,1266.3,915.3,1248.3,915.3z"
+              />
+              <circle class="st0" cx="1248.4" cy="882.9" r="12.3" />
+              <circle class="st17" cx="1248.3" cy="883.1" r="6.3" />
+            </g>
+            <path
+              class="st20"
+              d="M577.6,820l26.9,43.1c0,0,78.9-36.9,107.1-102s51.5-183.9,51.5-183.9L673.6,557c0,0,15.3,112.4-17.2,179.5  C632.5,785.7,577.6,820,577.6,820z"
+            />
+            <path
+              class="st9"
+              d="M585.9,833.4c0,0-8.5-2.6-21.7,6.3c-13.2,8.9-16.9,13.9-16.9,13.9l41.8,62.3c2.8,4.1,8.3,5.3,12.5,2.6  c8.5-5.3,18.4-16.5,1.8-36c-18.8-22.1-6.3-31.2-6.3-31.2L585.9,833.4z"
+            />
+            <path
+              class="st9"
+              d="M804.3,889.7c0,0-6.9,5.7-6.7,21.6s2.3,21.8,2.3,21.8l75-0.4c5,0,9-4,9.1-8.9c0.3-10-3.6-24.5-29-21.4  c-28.8,3.5-30.3-12.8-30.3-12.8L804.3,889.7z"
+            />
+            <path
+              class="st21"
+              d="M790.4,890.2h57.1c0,0,6-66.5-5.3-136c-14.4-89-81.9-154.2-81.9-154.2l-83.2,18.3c0,0,89.5,60.2,103.6,142.8  C791.6,824.6,790.4,890.2,790.4,890.2z"
+            />
+            <path
+              class="st20"
+              d="M912.9,416.6L912.9,416.6c3.2-9.7-2.1-20.1-11.8-23.3c0,0-55.6,3.9-91.2-2.6c-37.5-6.8-103.4-23.4-103.4-23.4  c-9.7-3.2-20.1,2.1-23.3,11.8v0c-3.2,9.7,3.8,15.7,11.8,23.3c0,0,66.3,18,102.6,23.2c41,5.8,92,2.8,92,2.8  C899.4,431.6,909.8,426.3,912.9,416.6z"
+            />
+            <g>
+              <path
+                class="st8"
+                d="M902.9,394.3l1.2,10.3c0.5,4.4,4.5,7.6,8.9,7.1l34.9-4c4.4-0.5,7.6-4.5,7.1-8.9l-1.2-10.3   c-0.5-4.7-4.8-8.1-9.5-7.6l-33.8,3.9C905.7,385.3,902.3,389.5,902.9,394.3z"
+              />
+              <path
+                class="st8"
+                d="M947.2,383.3L947.2,383.3c-3.5,0.4-6,3.6-5.6,7.1l3.3,29.2c0.4,3.5,3.6,6,7.1,5.6l0,0c3.5-0.4,6-3.6,5.6-7.1   l-3.3-29.2C953.8,385.4,950.7,382.9,947.2,383.3z"
+              />
+              <path
+                class="st8"
+                d="M935.1,390.5L935.1,390.5c-3.5,0.4-6,3.6-5.6,7.1l3.3,29.2c0.4,3.5,3.6,6,7.1,5.6l0,0c3.5-0.4,6-3.6,5.6-7.1   l-3.3-29.2C941.8,392.6,938.6,390.1,935.1,390.5z"
+              />
+              <path
+                class="st8"
+                d="M922,388.8L922,388.8c-3.5,0.4-6,3.6-5.6,7.1l3.3,29.2c0.4,3.5,3.6,6,7.1,5.6l0,0c3.5-0.4,6-3.6,5.6-7.1   l-3.3-29.2C928.7,390.9,925.5,388.4,922,388.8z"
+              />
+              <path
+                class="st8"
+                d="M908.8,385.5L908.8,385.5c-3.5,0.4-6,3.6-5.6,7.1l3.3,29.2c0.4,3.5,3.6,6,7.1,5.6h0c3.5-0.4,6-3.6,5.6-7.1   l-3.3-29.2C915.4,387.7,912.3,385.1,908.8,385.5z"
+              />
+            </g>
+            <path
+              class="st22"
+              d="M726.5,342.8L726.5,342.8c38,0,52.5,42.9,61.7,97.7c9.2,54.8,18,167.5,18,167.5s-27.8,11.2-76.2,13.8  c-48.4,2.6-86.7-13.8-86.7-13.8s-2.5-27.8,1.3-108.2c2-43.5,10.7-89.2,26.2-124.4C683.2,347.5,717.2,342.8,726.5,342.8z"
+            />
+            <path
+              class="st20"
+              d="M750.9,387.1l-2.7-38.5c0,0,4,2.4,8.1,6.3c4.1,3.9,5.8,6.7,5.8,6.7l6.4,52.8L750.9,387.1z"
+            />
+            <path
+              class="st20"
+              d="M700,348.6l51.8,35.7l16.6,30.1l-86.1-54.7c0,0,3.6-2.8,8.3-6.3C695.3,349.9,700,348.6,700,348.6z"
+            />
+            <path
+              class="st21"
+              d="M707,499.9h57v42.5c0,11.9-9.6,21.5-21.5,21.5h-14c-11.9,0-21.5-9.6-21.5-21.5V499.9z"
+            />
+            <path
+              class="st21"
+              d="M904,443.8L904,443.8c2.3-9.9-3.8-19.8-13.7-22.2c0,0-55.9,13.4-91.1,5.1c-35.2-8.3-89.5-47.5-89.5-47.5  c-9.9-2.3-19.8,3.8-22.2,13.7v0c-2.3,9.9,5.1,15.4,13.7,22.2c0,0,52.9,38.9,88.7,47.3c35.8,8.4,91.9-4.9,91.9-4.9  C891.8,459.8,901.7,453.7,904,443.8z"
+            />
+            <g>
+              <path
+                class="st8"
+                d="M871.6,428.1l0.8,10.3c0.4,4.5,4.2,7.8,8.7,7.4l35-2.8c4.5-0.4,7.8-4.2,7.4-8.7l-0.8-10.3   c-0.4-4.7-4.5-8.3-9.2-7.9l-34,2.7C874.7,419.2,871.2,423.4,871.6,428.1z"
+              />
+              <path
+                class="st8"
+                d="M916.2,418.7L916.2,418.7c-3.5,0.3-6.2,3.4-5.9,6.9l2.3,29.3c0.3,3.5,3.4,6.2,6.9,5.9l0,0   c3.5-0.3,6.2-3.4,5.9-6.9l-2.3-29.3C922.8,421.1,919.7,418.4,916.2,418.7z"
+              />
+              <path
+                class="st8"
+                d="M903.9,425.5L903.9,425.5c-3.5,0.3-6.2,3.4-5.9,6.9l2.3,29.3c0.3,3.5,3.4,6.2,6.9,5.9l0,0   c3.5-0.3,6.2-3.4,5.9-6.9l-2.3-29.3C910.5,427.8,907.4,425.2,903.9,425.5z"
+              />
+              <path
+                class="st8"
+                d="M890.9,423.3L890.9,423.3c-3.5,0.3-6.2,3.4-5.9,6.9l2.3,29.3c0.3,3.5,3.4,6.2,6.9,5.9v0   c3.5-0.3,6.2-3.4,5.9-6.9l-2.3-29.3C897.5,425.6,894.4,423,890.9,423.3z"
+              />
+              <path
+                class="st8"
+                d="M877.8,419.6L877.8,419.6c-3.5,0.3-6.2,3.4-5.9,6.9l2.3,29.3c0.3,3.5,3.4,6.2,6.9,5.9l0,0   c3.5-0.3,6.2-3.4,5.9-6.9l-2.3-29.3C884.4,421.9,881.3,419.3,877.8,419.6z"
+              />
+            </g>
+            <path
+              class="st8"
+              d="M748.3,345.6c0,13.4,3.5,38.6,3.5,38.6l-52.5-35.7v-24.5h49V345.6z"
+            />
+            <path
+              class="st10"
+              d="M699.3,340c9.5,4.1,19.4,6.3,28.9,6.3c6.6,0,13.4-1.1,20.1-3.1v-15.5h-49V340z"
+            />
+            <path
+              class="st8"
+              d="M727.7,335.8c-31.9,0-70.4-27.9-70.4-67.1v-47.2c0-39,31.6-70.6,70.6-70.6h0c39,0,70.6,31.6,70.6,70.6v47.2  C798.4,307.9,776.2,335.8,727.7,335.8z"
+            />
+            <path
+              class="st23"
+              d="M667.9,215.8c0,0,17.4-0.8,24.8-22.9c0,0,7.1,7.6,35.5,10.6c29.7,3.1,37.8-3.1,52.5,0.3  c10.2,2.3,17.7,12,17.7,12s9.9-12.8,11.3-26.3c2.1-20.7-7.6-46.6-38.9-59.8c-51.8-21.8-81,21.5-81,21.5s-30-7.7-48.6,22.8  c-14.5,23.8,2.1,48.6,2.1,48.6L667.9,215.8z"
+            />
+            <circle class="st8" cx="656.9" cy="237" r="20.1" />
+            <path
+              class="st11"
+              d="M652.9,239.8c0-3.9,3.2-7.1,7.1-7.1c1.1,0,2.1,0.2,3,0.7c-1.2-2.1-3.5-3.5-6.1-3.5c-3.9,0-7.1,3.2-7.1,7.1  c0,2.8,1.7,5.3,4.1,6.4C653.2,242.3,652.9,241.1,652.9,239.8z"
+            />
+            <path
+              class="st24"
+              d="M735.5,271.5c0,12.5,10.1,22.6,22.6,22.6l0,0c12.5,0,22.6-10.1,22.6-22.6"
+            />
+            <path
+              class="st11"
+              d="M757.9,247.7v14.5c0,0.7,0.8,1.2,1.5,1.2h8.6c2.3,0,3.6-2.7,2.1-4.5l-9.9-11.9  C759.5,246.1,757.9,246.6,757.9,247.7z"
+            />
+            <ellipse class="st17" cx="726.9" cy="239.4" rx="4.6" ry="8.1" />
+            <ellipse class="st17" cx="785" cy="239.4" rx="4.6" ry="8.1" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>
+        This page was intentionally made inaccessible! For demo purposes.
+        <a href="https://web.dev/learn/accessibility/test-automated/"
+          >Learn more</a
+        >.
+      </p>
+    </div>
+    <script>
+      let mobileNavBtn = document.getElementById("mobile-nav-btn");
+      let mobileNav = document.getElementById("mobile-nav");
+
+      mobileNavBtn.addEventListener("click", function () {
+        if (mobileNav.hasAttribute("class")) {
+          mobileNav.removeAttribute("class");
+        } else {
+          mobileNav.setAttribute("class", "active");
+        }
+      });
+    </script>
+  </body>
+</html>

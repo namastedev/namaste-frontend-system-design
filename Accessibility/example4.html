@@ -1,0 +1,72 @@
+<!-- Skip Link -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+      body {
+        font-family: "Open Sans", sans-serif;
+        margin: 2rem;
+      }
+
+      ul {
+        list-style: none;
+        padding-inline-start: 0;
+      }
+
+      li {
+        float: left;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        clear: both;
+      }
+
+      .visually-hidden {
+        position: absolute !important;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        color: red;
+      }
+
+      .visually-hidden:focus {
+        position: unset !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="#content" class="visually-hidden">Skip to main content</a>
+      <nav>
+        <ul>
+          <li><a href="#">Menu item 1</a></li>
+          <li><a href="#">Menu item 2</a></li>
+          <li><a href="#">Menu item 3</a></li>
+          <li><a href="#">Menu item 4</a></li>
+          <li><a href="#">Menu item 5</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="content">
+      <h1>Hello world!</h1>
+      <div>
+        Cupcake ipsum dolor sit amet soufflé gingerbread. Tart cake biscuit
+        cotton candy cake donut cake marshmallow jelly beans. Oat cake
+        shortbread pudding soufflé cookie dragée icing. Danish
+        <a href="#">gummi bears</a> donut cake lollipop jelly-o. Candy toffee
+        croissant fruitcake soufflé sesame snaps bonbon bear claw. Jelly toffee
+        bear claw sweet dragée marshmallow bonbon cookie jelly. Cupcake
+        gingerbread brownie tiramisu. Pastry danish fruitcake sugar plum candy
+        jelly beans jelly-o.
+      </div>
+    </main>
+  </body>
+</html>

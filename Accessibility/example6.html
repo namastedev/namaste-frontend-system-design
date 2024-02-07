@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* Forked from Mark Steadman's CodePen https://codepen.io/markSteady/pen/RwJVGmP */
+
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+      body {
+        margin: 1rem auto;
+        font-family: "Open Sans", sans-serif;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        margin: 0 auto;
+      }
+
+      .grid-item {
+        padding: 1rem 1.25rem;
+        margin: 0.25rem auto;
+        overflow: hidden;
+      }
+
+      button,
+      div[role="button"] {
+        color: #ffffff;
+        background-color: #006cc1;
+        font-size: 1rem;
+        max-width: 375px;
+        min-width: 120px;
+        padding: 9px 12px 10px;
+        border: solid 1px transparent;
+        line-height: 2;
+        text-align: center;
+        border-radius: 8px;
+        font-family: "Open Sans", sans-serif;
+        display: inline-block;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+      }
+
+      button:hover,
+      div[role="button"]:hover {
+        background: #00579b;
+      }
+
+      button:focus,
+      [role="button"]:focus {
+        outline: none;
+      }
+
+      button:focus::before,
+      [role="button"]:focus::before {
+        position: absolute;
+        z-index: -1;
+
+        /* button border width - outline width - offset */
+        top: calc(-1px - 3px - 3px);
+        right: calc(-1px - 3px - 3px);
+        bottom: calc(-1px - 3px - 3px);
+        left: calc(-1px - 3px - 3px);
+        border: 3px solid hsl(213deg 71% 49%);
+
+        /* button border radius + outline width + offset */
+        border-radius: calc(5px + 3px + 3px);
+        content: "";
+      }
+
+      .mad {
+        font-weight: 900;
+        color: #8e01ff;
+        padding-top: 1rem;
+      }
+
+      .liveRegion {
+        font-weight: 900;
+        color: #8e01ff;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div role="main" class="grid">
+      <div class="grid-item">
+        <button id="dynamic" class="desc">Click for Notification</button>
+        <h2>Dynamic Live Region</h2>
+        <p>
+          Clicking this button adds a new div with
+          <code>aria-live="assertive"</code> directly to the DOM. If you are
+          dynamically adding HTML into your page, be sure to allow time for
+          screen readers to read the content of the live region.
+        </p>
+      </div>
+      <div class="grid-item">
+        <button id="hiddenLive">Click for Status Change</button>
+        <p class="hidden liveRegion" aria-live></p>
+        <h2>Updating Hidden Live Region</h2>
+        <p>
+          Clicking this button adds markup to the hidden live region and
+          dynamically updates the type of live region to be used.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Adding an element to the DOM dynamically
+      let dynamicHTML = document.getElementById("dynamic");
+      let hiddenLive = document.getElementById("hiddenLive");
+      let desc = document.querySelector(".desc");
+
+      // Dynamic click event to add a live region to the page
+      // Note: Timeout is there for SR proper reading
+      dynamicHTML.addEventListener("click", function () {
+        let liveRegion = document.querySelector(".mad");
+        liveRegion ? liveRegion.remove() : null;
+
+        setTimeout(() => {
+          desc.insertAdjacentHTML(
+            "afterend",
+            '<div class="mad" aria-live="assertive">I have a notification for you!</div>'
+          );
+        }, 500);
+      });
+
+      // Shows live region, then adds in the text, and sets the state of aria-live
+      hiddenLive.addEventListener("click", function () {
+        let liveRegion = document.querySelector(".liveRegion");
+        liveRegion.classList.remove("hidden");
+        liveRegion.innerHTML = "I am alert text!";
+        liveRegion.setAttribute("aria-live", "assertive");
+      });
+    </script>
+  </body>
+</html>
