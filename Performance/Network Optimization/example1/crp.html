@@ -1,0 +1,59 @@
+<!-- Critical Rendering Path -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Render Showcase</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        #loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loader">Loading...</div>
+
+<div id="content">
+    <h1>Performance Render Showcase</h1>
+    <p>This content is rendered on the first packet within 14kb, demonstrating improved performance.</p>
+    <!-- <img src="placeholder-image.jpg" alt="Placeholder Image" style="max-width: 100%;"> -->
+    <p>Additional content and features go here...</p>
+</div>
+
+<script>
+    // Simulate loading the first packet
+    setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    }, 2000); // Adjust the time as needed
+</script>
+
+</body>
+</html>

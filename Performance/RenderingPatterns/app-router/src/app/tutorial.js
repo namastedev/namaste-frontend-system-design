@@ -1,4 +1,4 @@
-"use client"
+// "use client";
 import Image from 'next/image';
 export const Tutorials = ({ video }) => {
   console.log('Where did you render - tutorials? ')

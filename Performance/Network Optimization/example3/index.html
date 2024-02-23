@@ -1,0 +1,61 @@
+<!-- Resource Hinting & Fetch Priority -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTTP headers</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js" defer></script>
+    <!-- <link rel="preconnect" href="https://cdn.glitch.global" crossorigin /> -->
+    <!-- <link rel="dns-prefetch" href="https://cdn.glitch.global" crossorigin /> -->
+    <!-- <link
+      rel="preload"
+      href="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-1.jpg?v=1669198400523"
+      as="image"
+    /> -->
+  </head>
+  <body>
+    <div class="content">
+      <main>
+        <div class="gallery">
+          <div class="large">
+            <img
+              src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-1.jpg?v=1669198400523"
+              alt="Image 1"
+              class="image"
+              fetchPriority="low"
+            />
+          </div>
+          <div class="thumbnails">
+            <img
+              src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-1.jpg?v=1669198400523"
+              alt="Image 1"
+              class="image"
+              fetchPriority="low"
+            />
+            <img
+              src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-2.jpg?v=1669198401407"
+              alt="Image 2"
+              class="image"
+              fetchPriority="low"
+            />
+            <img
+              src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-3.jpg?v=1669198402295"
+              alt="Image 3"
+              class="image"
+              fetchPriority="low"
+            />
+            <img
+              src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-4.jpg?v=1669198402935"
+              alt="Image 4"
+              class="image"
+              fetchPriority="high"
+            />
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

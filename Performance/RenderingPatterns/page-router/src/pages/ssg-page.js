@@ -29,9 +29,11 @@ export default function Home({ videos }) {
   return (
     <>
     <h1>Tutorials</h1>
-      {videos.map((video, index) => (
-        <Tutorials video={video}  key={index}/>
-      ))}
+    <ul>
+        {videos?.map((video, index) => (
+          <Tutorials video={video} key={index} />
+        ))}
+      </ul>
     </>
   )
 }
