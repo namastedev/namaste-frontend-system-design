@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useState } from "react";
 import Accordion from "./components/Accordion";
+import Comments from "./components/comments/Comments";
 
 function App() {
   const [lang, setLang] = useState("en");
@@ -13,10 +14,11 @@ function App() {
     <div>
       <header className="text-2xl font-bold py-5 bg-black text-white text-center flex">
         Hello World
-        <nav className="px-20 m-2 w-[600px] flex justify-between text-lg">
+        <nav className="px-20 m-2 w-[800px] flex justify-between text-lg">
           <a href="/">Home </a>
           <a href="/about">About </a>
           <a href="/accordion">Accordion </a>
+          <a href="/comments">Nested Comments </a>
           <a href="/team">Team </a>
           <a href="/login">Login </a>
         </nav>
@@ -37,6 +39,7 @@ function App() {
           <Route path="/about" element={<About lang={lang} />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/accordion" element={<Accordion />}></Route>
+          <Route path="/comments" element={<Comments />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
