@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Cropping and Resizing</title>
+  <style>
+    #canvas-container {
+      position: relative;
+    }
+    #canvas {
+      border: 2px solid #333;
+    }
+    #crop-button {
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="image-input" accept="image/*">
+  <div id="canvas-container">
+    <canvas id="canvas" width="400" height="400"></canvas>
+  </div>
+  <button id="crop-button">Crop and Resize</button>
+
+  <script>
+    document.getElementById('image-input').addEventListener('change', handleImage);
+    document.getElementById('crop-button').addEventListener('click', cropAndResize);
+
+    let ctx, img, startX, startY, isDragging = false;
+
+    function handleImage(event) {
+      const fileInput = event.target;
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          img = new Image();
+          img.onload = function () {
+            drawImage();
+          };
+          img.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function drawImage() {
+      const canvas = document.getElementById('canvas');
+      ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // Draw the crop rectangle if dragging
+      if (isDragging) {
+        drawCropRect();
+      }
+    }
+
+    function cropAndResize() {
+      if (startX !== undefined && startY !== undefined) {
+        const canvas = document.getElementById('canvas');
+        const ratioX = img.width / canvas.width;
+        const ratioY = img.height / canvas.height;
+
+        const croppedWidth = Math.abs(startX - endX);
+        const croppedHeight = Math.abs(startY - endY);
+
+        const croppedImage = document.createElement('canvas');
+        const croppedCtx = croppedImage.getContext('2d');
+
+        croppedImage.width = croppedWidth;
+        croppedImage.height = croppedHeight;
+
+        croppedCtx.drawImage(
+          img,
+          Math.min(startX, endX) * ratioX,
+          Math.min(startY, endY) * ratioY,
+          croppedWidth * ratioX,
+          croppedHeight * ratioY,
+          0,
+          0,
+          croppedWidth,
+          croppedHeight
+        );
+
+        // Resize the cropped image (you can adjust the dimensions as needed)
+        const resizedImage = document.createElement('canvas');
+        const resizedCtx = resizedImage.getContext('2d');
+
+        resizedImage.width = 200; // Adjust the width as needed
+        resizedImage.height = 200; // Adjust the height as needed
+
+        resizedCtx.drawImage(croppedImage, 0, 0, resizedImage.width, resizedImage.height);
+
+        // Display the resized image or do something with it
+        document.body.appendChild(resizedImage);
+      }
+
+      // Reset the dragging state and redraw the image
+      isDragging = false;
+      drawImage();
+    }
+
+    // Event listeners for dragging to select the crop area
+    document.getElementById('canvas').addEventListener('mousedown', handleMouseDown);
+    document.getElementById('canvas').addEventListener('mousemove', handleMouseMove);
+    document.getElementById('canvas').addEventListener('mouseup', handleMouseUp);
+
+    function handleMouseDown(e) {
+      startX = e.offsetX;
+      startY = e.offsetY;
+      isDragging = true;
+    }
+
+    function handleMouseMove(e) {
+      if (isDragging) {
+        endX = e.offsetX;
+        endY = e.offsetY;
+        drawImage();
+      }
+    }
+
+    function handleMouseUp() {
+      isDragging = false;
+      // The crop rectangle will be drawn until the "Crop and Resize" button is clicked
+    }
+
+    function drawCropRect() {
+      const canvas = document.getElementById('canvas');
+      const width = Math.abs(endX - startX);
+      const height = Math.abs(endY - startY);
+      const x = Math.min(startX, endX);
+      const y = Math.min(startY, endY);
+
+      ctx.strokeStyle = '#FF0000';
+      ctx.strokeRect(x, y, width, height);
+    }
+  </script>
+</body>
+</html>

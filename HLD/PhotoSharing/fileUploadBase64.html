@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload and Convert to Base64</title>
+    <style>
+      .file-upload {
+        text-align: center;
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="file-upload">
+      <h1>File upload as base64</h1>
+      <input type="file" id="fileInput" onchange="handleFileSelect()" />
+      <button onclick="uploadBase64()">Upload</button>
+    </div>
+
+    <script>
+      function handleFileSelect() {
+        const fileInput = document.getElementById("fileInput");
+
+        // Check if a file is selected
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+
+          // Use FileReader to read the file
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            const base64String = e.target.result.split(",")[1]; // Extract base64 data
+
+            // Save the base64String or use it as needed
+            console.log("Base64 String:", base64String);
+          };
+
+          // Read the file as data URL
+          reader.readAsDataURL(file);
+        } else {
+          console.log("No file selected");
+        }
+      }
+
+      function uploadBase64() {
+        // Perform upload action here, e.g., send the base64String to the server
+        console.log("Uploading...");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload with Fetch and multipart/form-data</title>
+    <style>
+        .file-upload {
+          text-align: center;
+          padding: 30px;
+        }
+      </style>
+</head>
+  <body>
+    <div class="file-upload">
+        <h1>File upload as Multipart</h1>
+      <input
+        type="file"
+        id="fileInput"
+        accept=".png, .pdf, .doc, .docx, .txt"
+      />
+      <button onclick="uploadFile()">Upload</button>
+    </div>
+
+    <script>
+      function uploadFile() {
+        const fileInput = document.getElementById("fileInput");
+
+        // Check if a file is selected
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+
+          // Create FormData object and append the file
+          const formData = new FormData();
+          formData.append("fileInput", file);
+
+          // Perform the fetch to upload the file
+          fetch("/your-upload-endpoint", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+            .then((response) => {
+              // Handle the response here
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("File upload failed.");
+              }
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error.message);
+            });
+        } else {
+          console.log("No file selected");
+        }
+      }
+    </script>
+  </body>
+</html>

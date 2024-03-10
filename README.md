@@ -41,3 +41,7 @@
 - Contrast Theme & 400% Zoom
 - Tooling
 - Labs With Examples
+
+# Performance
+
+- Rendering Patterns

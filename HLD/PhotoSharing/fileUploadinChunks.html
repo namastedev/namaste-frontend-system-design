@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumable File Upload</title>
+</head>
+<body>
+
+<input type="file" id="fileInput" accept=".pdf, .doc, .docx, .txt">
+<button onclick="uploadFile()">Upload</button>
+<div id="progress"></div>
+
+<script>
+const chunkSize = 1024 * 1024; // 1MB chunk size
+let file;
+let start = 0;
+
+function uploadFile() {
+  const fileInput = document.getElementById('fileInput');
+
+  // Check if a file is selected
+  if (fileInput.files.length > 0) {
+    file = fileInput.files[0];
+
+    // Create a FormData object and append the file
+    const formData = new FormData();
+    formData.append('fileInput', file);
+
+    // Calculate total number of chunks
+    const totalChunks = Math.ceil(file.size / chunkSize);
+
+    // Perform the fetch to upload the file chunks
+    uploadChunk(formData, totalChunks);
+  } else {
+    console.log("No file selected");
+  }
+}
+
+function uploadChunk(formData, totalChunks) {
+  const chunk = file.slice(start, start + chunkSize);
+  formData.set('chunk', chunk);
+  formData.set('chunkNumber', Math.ceil(start / chunkSize) + 1);
+  formData.set('totalChunks', totalChunks);
+  formData.set('start', start);
+  formData.set('end', start + chunk.size);
+
+  fetch('/your-upload-endpoint', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    // Handle the response here
+    if (response.ok) {
+      start += chunkSize;
+      const progress = Math.min((start / file.size) * 100, 100);
+      document.getElementById('progress').innerText = `Upload Progress: ${progress.toFixed(2)}%`;
+
+      if (start < file.size) {
+        // If there are more chunks, recursively upload the next chunk
+        uploadChunk(formData, totalChunks);
+      } else {
+        // All chunks uploaded, display completion message
+        document.getElementById('progress').innerText = 'Upload Completed!';
+      }
+    } else {
+      throw new Error('File upload failed.');
+    }
+  })
+  .catch(error => {
+    console.error(error.message);
+  });
+}
+</script>
+
+</body>
+</html>
