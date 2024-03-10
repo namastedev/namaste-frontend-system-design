@@ -45,3 +45,8 @@
 # Performance
 
 - Rendering Patterns
+
+# HLD
+
+- Photo Sharing (Instagram)
+- E-commerce Marketplace
