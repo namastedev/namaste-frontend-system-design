@@ -1,10 +1,13 @@
 import About from "./components/About";
 import Body from "./components/Body";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Team from "./components/Team";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useState } from "react";
+import Accordion from "./components/Accordion";
+import Comments from "./components/comments/Comments";
+import ImageSlider from "./components/image-slider/ImageSlider";
 
 function App() {
   const [lang, setLang] = useState("en");
@@ -12,9 +15,12 @@ function App() {
     <div>
       <header className="text-2xl font-bold py-5 bg-black text-white text-center flex">
         Hello World
-        <nav className="p-2 m-2 w-96 justify-between text-lg">
+        <nav className="px-20 m-2 w-[800px] flex justify-between text-lg">
           <a href="/">Home </a>
           <a href="/about">About </a>
+          <a href="/accordion">Accordion </a>
+          <a href="/comments">Nested Comments </a>
+          <a href="/image-slider">Image Slider </a>
           <a href="/team">Team </a>
           <a href="/login">Login </a>
         </nav>
@@ -34,6 +40,9 @@ function App() {
           </Route>
           <Route path="/about" element={<About lang={lang} />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/accordion" element={<Accordion />}></Route>
+          <Route path="/comments" element={<Comments />}></Route>
+          <Route path="/image-slider" element={<ImageSlider />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
