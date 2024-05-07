@@ -10,6 +10,7 @@ import Comments from "./components/comments/Comments";
 import ImageSlider from "./components/image-slider/ImageSlider";
 import Pagination from "./components/pagination/Pagination";
 import LiveChat from "./components/live-chat/Live Chat";
+import SearchUi from "./components/search-ui/SearchUi";
 
 function App() {
   const [lang, setLang] = useState("en");
@@ -25,6 +26,7 @@ function App() {
           <a href="/image-slider">Image Slider </a>
           <a href="/pagination">Pagination </a>
           <a href="/live-chat">Live Chat </a>
+          <a href="/search-ui">Search UI </a>
           <a href="/team">Team </a>
           <a href="/login">Login </a>
         </nav>
@@ -49,6 +51,7 @@ function App() {
           <Route path="/image-slider" element={<ImageSlider />}></Route>
           <Route path="/pagination" element={<Pagination />}></Route>
           <Route path="/live-chat" element={<LiveChat />}></Route>
+          <Route path="/search-ui" element={<SearchUi />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
