@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Video Player</title>
+<style>
+    #video-container {
+        width: 640px;
+        margin: 0 auto;
+    }
+
+    video {
+        width: 100%;
+    }
+
+    #controls {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div id="video-container">
+    <video id="video" controls></video>
+    <div id="controls">
+        <button id="play-pause">Play/Pause</button>
+        <button id="restart">Restart</button>
+        <input id="seek-bar" type="range" min="0" value="0">
+    </div>
+</div>
+
+<script>
+    var video = document.getElementById('video');
+    var playPauseButton = document.getElementById('play-pause');
+    var restartButton = document.getElementById('restart');
+    var seekBar = document.getElementById('seek-bar');
+
+    var mediaSource = new MediaSource();
+    video.src = URL.createObjectURL(mediaSource);
+
+    mediaSource.addEventListener('sourceopen', function() {
+        try {
+            var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+            fetch("https://file-examples.com/storage/fec06cc4c3663920ba15624/2017/04/file_example_MP4_480_1_5MG.mp4")
+                .then(response => response.arrayBuffer())
+                .then(function(data) {
+                    sourceBuffer.appendBuffer(data);
+                    video.play().catch(function(error) {
+                        console.error('Error playing video:', error);
+                    });
+                });
+        } catch (error) {
+            console.error('Error adding source buffer:', error);
+        }
+    });
+
+    playPauseButton.addEventListener('click', function() {
+        if (video.paused) {
+            video.play();
+            playPauseButton.innerHTML = 'Pause';
+        } else {
+            video.pause();
+            playPauseButton.innerHTML = 'Play';
+        }
+    });
+
+    restartButton.addEventListener('click', function() {
+        video.currentTime = 0;
+    });
+
+    seekBar.addEventListener('change', function() {
+        var time = video.duration * (seekBar.value / 100);
+        video.currentTime = time;
+    });
+
+    video.addEventListener('timeupdate', function() {
+        var value = (100 / video.duration) * video.currentTime;
+        seekBar.value = value;
+    });
+</script>
+</body>
+</html>
