@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Rectangle Drawing</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    canvas {
+      border: 1px solid black;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let startX, startY;
+
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.8;
+
+    canvas.addEventListener('mousedown', startRectangle);
+    canvas.addEventListener('mousemove', drawRectangle);
+    canvas.addEventListener('mouseup', finishRectangle);
+    canvas.addEventListener('mouseleave', cancelRectangle);
+
+    function startRectangle(event) {
+      isDrawing = true;
+      startX = event.clientX - canvas.getBoundingClientRect().left;
+      startY = event.clientY - canvas.getBoundingClientRect().top;
+    }
+
+    function drawRectangle(event) {
+      if (!isDrawing) return;
+      const currentX = event.clientX - canvas.getBoundingClientRect().left;
+      const currentY = event.clientY - canvas.getBoundingClientRect().top;
+      const width = currentX - startX;
+      const height = currentY - startY;
+
+      clearCanvas();
+      ctx.beginPath();
+      ctx.rect(startX, startY, width, height);
+      ctx.stroke();
+    }
+
+    function finishRectangle() {
+      isDrawing = false;
+    }
+
+    function cancelRectangle() {
+      isDrawing = false;
+      clearCanvas();
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Shape Editor with Sync</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .toolbar {
+      margin: 20px;
+    }
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="clear-btn">Clear</button>
+  </div>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const clearButton = document.getElementById('clear-btn');
+    const ctx = canvas.getContext('2d');
+    let shapes = [];
+    let drawing = false;
+    let currentShape = null;
+    let selectedShape = null;
+    let offsetX, offsetY;
+
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.8;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 5;
+
+    // Initialize shapes from local storage
+    loadShapesFromLocalStorage();
+
+    canvas.addEventListener('mousedown', startDrawingOrSelecting);
+    canvas.addEventListener('mouseup', finishDrawingOrSelecting);
+    canvas.addEventListener('mousemove', drawOrMoveShape);
+    window.addEventListener('storage', syncShapesAcrossTabs);
+
+    function startDrawingOrSelecting(event) {
+      const { x, y } = getMousePosition(event);
+      if (selectedShape) {
+        selectedShape = null;
+        redrawCanvas();
+      } else {
+        const shape = shapes.find(shape => isPointInShape(x, y, shape));
+        if (shape) {
+          selectedShape = shape;
+          offsetX = x - selectedShape.startX;
+          offsetY = y - selectedShape.startY;
+        } else {
+          startDrawing(event);
+        }
+      }
+    }
+
+    function startDrawing(event) {
+      const { x, y } = getMousePosition(event);
+      currentShape = {
+        type: 'line', // You can add more types like 'rectangle', 'circle', etc.
+        startX: x,
+        startY: y,
+        endX: x,
+        endY: y,
+        color: '#000000',
+        lineWidth: 5
+      };
+      drawing = true;
+    }
+
+    function finishDrawingOrSelecting() {
+      if (drawing && currentShape) {
+        shapes.push(currentShape);
+        saveShapesToLocalStorage();
+        drawing = false;
+        currentShape = null;
+        redrawCanvas();
+      } else if (selectedShape) {
+        selectedShape = null;
+      }
+    }
+
+    function drawOrMoveShape(event) {
+      if (drawing) {
+        draw(event);
+      } else if (selectedShape) {
+        moveShape(event);
+      }
+    }
+
+    function draw(event) {
+      if (!drawing) return;
+      const { x, y } = getMousePosition(event);
+      currentShape.endX = x;
+      currentShape.endY = y;
+      redrawCanvas();
+    }
+
+    function moveShape(event) {
+      const { x, y } = getMousePosition(event);
+      selectedShape.startX = x - offsetX;
+      selectedShape.startY = y - offsetY;
+      selectedShape.endX = x - offsetX + (selectedShape.endX - selectedShape.startX);
+      selectedShape.endY = y - offsetY + (selectedShape.endY - selectedShape.startY);
+      saveShapesToLocalStorage();
+      redrawCanvas();
+    }
+
+    function redrawCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      shapes.forEach(shape => drawShape(shape));
+      if (currentShape) drawShape(currentShape);
+    }
+
+    function drawShape(shape) {
+      ctx.beginPath();
+      ctx.moveTo(shape.startX, shape.startY);
+      ctx.lineTo(shape.endX, shape.endY);
+      ctx.strokeStyle = shape.color;
+      ctx.lineWidth = shape.lineWidth;
+      ctx.stroke();
+      if (shape === selectedShape) {
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        ctx.strokeRect(shape.startX - 5, shape.startY - 5, shape.endX - shape.startX + 10, shape.endY - shape.startY + 10);
+        ctx.setLineDash([]);
+      }
+    }
+
+    function getMousePosition(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+      };
+    }
+
+    function isPointInShape(x, y, shape) {
+      const tolerance = 5;
+      const minX = Math.min(shape.startX, shape.endX) - tolerance;
+      const maxX = Math.max(shape.startX, shape.endX) + tolerance;
+      const minY = Math.min(shape.startY, shape.endY) - tolerance;
+      const maxY = Math.max(shape.startY, shape.endY) + tolerance;
+      return x >= minX && x <= maxX && y >= minY && y <= maxY;
+    }
+
+    function saveShapesToLocalStorage() {
+      localStorage.setItem('shapes', JSON.stringify(shapes));
+    }
+
+    function loadShapesFromLocalStorage() {
+      const storedShapes = localStorage.getItem('shapes');
+      if (storedShapes) {
+        shapes = JSON.parse(storedShapes);
+        redrawCanvas();
+      }
+    }
+
+    function syncShapesAcrossTabs(event) {
+      if (event.key === 'shapes') {
+        loadShapesFromLocalStorage();
+      }
+    }
+
+    clearButton.addEventListener('click', () => {
+      shapes = [];
+      saveShapesToLocalStorage();
+      redrawCanvas();
+    });
+
+  </script>
+
+  <script>
+    // Function to generate a random color in hex format
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Set random color to body background on page load
+    document.body.style.backgroundColor = getRandomColor();
+  </script>
+</body>
+</html>

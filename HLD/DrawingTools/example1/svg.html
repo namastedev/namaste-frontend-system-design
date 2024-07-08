@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Free-Hand Whiteboard</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .toolbar {
+      margin: 20px;
+    }
+    svg {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="clear-btn">Clear</button>
+  </div>
+  <svg id="svg" width="80%" height="80%"></svg>
+  <script>
+    const svg = document.getElementById('svg');
+    const clearButton = document.getElementById('clear-btn');
+    let drawing = false;
+    let path;
+
+    svg.addEventListener('mousedown', startDrawing);
+    svg.addEventListener('mouseup', finishDrawing);
+    svg.addEventListener('mousemove', draw);
+
+    function startDrawing(event) {
+      drawing = true;
+      const { x, y } = getMousePosition(event);
+      path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', '#000000');
+      path.setAttribute('stroke-width', '5');
+      path.setAttribute('d', `M${x},${y}`);
+      svg.appendChild(path);
+    }
+
+    function finishDrawing() {
+      drawing = false;
+      path = null;
+    }
+
+    function draw(event) {
+      if (!drawing) return;
+      const { x, y } = getMousePosition(event);
+      const d = path.getAttribute('d');
+      path.setAttribute('d', `${d} L${x},${y}`);
+    }
+
+    function getMousePosition(event) {
+      const CTM = svg.getScreenCTM();
+      return {
+        x: (event.clientX - CTM.e) / CTM.a,
+        y: (event.clientY - CTM.f) / CTM.d
+      };
+    }
+
+    clearButton.addEventListener('click', () => {
+      while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>
