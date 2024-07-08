@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel {
+            position: relative;
+            width: 25%;
+            overflow: hidden;
+            margin-left: 50%;
+          }
+          
+          .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+          }
+          
+          .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+          }
+          
+          .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            cursor: pointer;
+          }
+          
+          .carousel-control.prev {
+            left: 10px;
+          }
+          
+          .carousel-control.next {
+            right: 10px;
+          }
+          
+          .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+          }
+          
+          .carousel-indicators button {
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
+          
+          .carousel-indicators .active {
+            background: rgba(255, 255, 255, 1);
+          }
+          
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18fd9c56bf0%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18fd9c56bf0%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.91796875%22%20y%3D%22218.45%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18fd9c56bf2%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18fd9c56bf2%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3125%22%20y%3D%22218.45%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Image 2">
+          </div>
+          <div class="carousel-item">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18fd9c56bf2%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18fd9c56bf2%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22276.99609375%22%20y%3D%22218.45%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Image 2">
+          </div>
+          <!-- More items -->
+        </div>
+        <button class="carousel-control prev" aria-label="Previous slide">&lt;</button>
+        <button class="carousel-control next" aria-label="Next slide">&gt;</button>
+        <div class="carousel-indicators">
+          <button data-slide-to="0" class="active" aria-label="Slide 1"></button>
+          <button data-slide-to="1" aria-label="Slide 2"></button>
+          <!-- More indicators -->
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.querySelector('.carousel');
+            const inner = carousel.querySelector('.carousel-inner');
+            const items = inner.querySelectorAll('.carousel-item');
+            const controls = carousel.querySelectorAll('.carousel-control');
+            const indicators = carousel.querySelectorAll('.carousel-indicators button');
+            let currentIndex = 0;
+          
+            function updateCarousel(index) {
+              inner.style.transform = `translateX(-${index * 100}%)`;
+              indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+              });
+            }
+          
+            controls.forEach(control => {
+              control.addEventListener('click', () => {
+                if (control.classList.contains('next')) {
+                  currentIndex = (currentIndex + 1) % items.length;
+                } else {
+                  currentIndex = (currentIndex - 1 + items.length) % items.length;
+                }
+                updateCarousel(currentIndex);
+              });
+            });
+          
+            indicators.forEach((indicator, index) => {
+              indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel(currentIndex);
+              });
+            });
+          
+            // Autoplay feature
+            setInterval(() => {
+              currentIndex = (currentIndex + 1) % items.length;
+              updateCarousel(currentIndex);
+            }, 5000); // Adjust the interval as needed
+          });
+          
+      </script>
+</body>
+</html>
