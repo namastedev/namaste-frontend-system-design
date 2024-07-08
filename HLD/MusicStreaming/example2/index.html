@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player with Media Source API</title>
+  <style>
+    /* Basic styling for the music player */
+    #music-player {
+      max-width: 300px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #controls {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    #controls button {
+      padding: 10px;
+    }
+    #volume-control {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="music-player">
+    <h1>Music Player</h1>
+    <audio id="audio-player" controls></audio>
+    <div id="controls">
+      <button id="play-button">Play</button>
+      <button id="pause-button">Pause</button>
+      <button id="stop-button">Stop</button>
+      <button id="prev-button">Previous</button>
+      <button id="next-button">Next</button>
+    </div>
+    <div id="volume-control">
+      <label for="volume-slider">Volume</label>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
