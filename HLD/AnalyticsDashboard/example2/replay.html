@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replay Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            position: relative;
+        }
+        .mouse-pointer {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Replayed Session</h1>
+    <div id="replayArea"></div>
+
+    <script>
+        const events = JSON.parse(localStorage.getItem('recordedEvents'));
+        const mousePointer = document.createElement('div');
+        mousePointer.classList.add('mouse-pointer');
+        document.body.appendChild(mousePointer);
+
+        let previousTimestamp = events[0].timestamp;
+
+        events.forEach((event, index) => {
+            const delay = event.timestamp - previousTimestamp;
+            setTimeout(() => {
+                switch (event.type) {
+                    case 'mousemove':
+                        mousePointer.style.left = `${event.x}px`;
+                        mousePointer.style.top = `${event.y}px`;
+                        break;
+                    case 'click':
+                        const targetClickElement = document.querySelector(event.targetSelector);
+                        if (targetClickElement) {
+                            targetClickElement.click();
+                        }
+                        break;
+                    case 'keypress':
+                        const targetKeyElement = document.querySelector(event.targetSelector);
+                        if (targetKeyElement) {
+                            const event = new KeyboardEvent('keypress', { key: event.key });
+                            targetKeyElement.dispatchEvent(event);
+                            targetKeyElement.value += event.key;
+                        }
+                        break;
+                    case 'submit':
+                        const formElement = document.querySelector(event.targetSelector);
+                        if (formElement) {
+                            formElement.name.value = event.formData.name;
+                            formElement.email.value = event.formData.email;
+                            formElement.submit();
+                        }
+                        break;
+                }
+            }, delay);
+            previousTimestamp = event.timestamp;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D3.js Line Chart</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script>
+      const data = [
+        { date: new Date(2023, 0, 1), value: 30 },
+        { date: new Date(2023, 0, 2), value: 80 },
+        { date: new Date(2023, 0, 3), value: 45 },
+        { date: new Date(2023, 0, 4), value: 60 },
+        { date: new Date(2023, 0, 5), value: 20 },
+        { date: new Date(2023, 0, 6), value: 90 },
+        { date: new Date(2023, 0, 7), value: 55 },
+      ];
+
+      const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+      const width = 960 - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
+
+      const x = d3
+        .scaleTime()
+        .domain(d3.extent(data, (d) => d.date))
+        .range([0, width]);
+
+      const y = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, (d) => d.value)])
+        .range([height, 0]);
+
+      const line = d3
+        .line()
+        .x((d) => x(d.date))
+        .y((d) => y(d.value));
+
+      const svg = d3
+        .select("#chart")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      svg
+        .append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x));
+
+      svg.append("g").attr("class", "y axis").call(d3.axisLeft(y));
+
+      svg
+        .append("path")
+        .datum(data)
+        .attr("class", "line")
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 1.5);
+    </script>
+  </body>
+</html>

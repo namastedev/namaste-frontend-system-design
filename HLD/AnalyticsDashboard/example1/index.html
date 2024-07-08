@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage Screen Recorder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #controls {
+            margin: 20px;
+        }
+        #recordedVideo {
+            margin: 20px auto;
+            display: block;
+            width: 640px;
+            height: 480px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Webpage Screen Recorder</h1>
+    <div id="controls">
+        <button id="startBtn">Start Recording</button>
+        <button id="stopBtn">Stop Recording</button>
+    </div>
+    <div>
+        <video id="recordedVideo" controls></video>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const recordedVideo = document.getElementById('recordedVideo');
+
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        // Start recording the screen
+        startBtn.addEventListener('click', async () => {
+            const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+            mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                recordedChunks = [];
+                const url = URL.createObjectURL(blob);
+                recordedVideo.src = url;
+            };
+
+            mediaRecorder.start();
+        });
+
+        // Stop recording the screen
+        stopBtn.addEventListener('click', () => {
+            mediaRecorder.stop();
+        });
+    </script>
+</body>
+</html>

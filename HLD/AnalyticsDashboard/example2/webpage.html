@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #recordingFrame {
+            width: 100%;
+            height: 500px;
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Recorded Session</h2>
+    <iframe id="recordingFrame" src="replay.html"></iframe>
+
+    <script>
+        const events = [];
+        const form = document.getElementById('registrationForm');
+
+        document.addEventListener('mousemove', (event) => {
+            events.push({
+                type: 'mousemove',
+                timestamp: Date.now(),
+                x: event.clientX,
+                y: event.clientY
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            events.push({
+                type: 'click',
+                timestamp: Date.now(),
+                x: event.clientX,
+                y: event.clientY,
+                targetSelector: getSelector(event.target)
+            });
+        });
+
+        document.addEventListener('keypress', (event) => {
+            events.push({
+                type: 'keypress',
+                timestamp: Date.now(),
+                key: event.key,
+                targetSelector: getSelector(event.target)
+            });
+        });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            events.push({
+                type: 'submit',
+                timestamp: Date.now(),
+                formData: {
+                    name: form.name.value,
+                    email: form.email.value
+                },
+                targetSelector: getSelector(event.target)
+            });
+            localStorage.setItem('recordedEvents', JSON.stringify(events));
+            alert('Form submitted and events recorded!');
+        });
+
+        function getSelector(element) {
+            if (element.id) {
+                return `#${element.id}`;
+            } else if (element.className) {
+                return `.${element.className.split(' ').join('.')}`;
+            } else {
+                return element.tagName.toLowerCase();
+            }
+        }
+    </script>
+</body>
+</html>
