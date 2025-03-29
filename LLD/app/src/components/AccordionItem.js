@@ -4,7 +4,7 @@ const AccordionItem = ({ title, body, isOpen, setIsOpen }) => {
       <div
         className="font-bold p-2 bg-slate-200 flex justify-between cursor-pointer"
         onClick={() => {
-          setIsOpen((isOpen) => !isOpen);
+          setIsOpen();
         }}
       >
         <span>{title}</span>
