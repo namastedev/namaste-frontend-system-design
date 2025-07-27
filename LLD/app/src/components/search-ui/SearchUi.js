@@ -23,7 +23,10 @@ const SearchUi = () => {
       );
       const json = await data.json();
       console.log(json[1]);
-      cache[searchText] = json[1];
+      setCache((prevCache) => ({
+        ...prevCache,
+        [searchText]: json[1],
+      }));
       setSearchResults(json[1]);
     }
   };
