@@ -1,6 +1,9 @@
 const VideoStream = () => {
   return (
     <div className="m-5">
+    {/* 
+      This is an iframe that embeds a youtube video, which is taken from the youtube video URL
+    */}
       <iframe
         width="1200"
         height="600"

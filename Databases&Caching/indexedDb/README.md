@@ -1,0 +1,1 @@
+<h1>ChatGpt Notes : <a href="https://chatgpt.com/share/68bacf16-64dc-8006-801e-39b9f3448592" target="_blank">ChatGPT Notes</a></h1>

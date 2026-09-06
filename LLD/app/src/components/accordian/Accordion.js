@@ -17,6 +17,7 @@ const data = [
 ];
 
 const Accordion = () => {
+  // This will open the 1st Accordion Item by default
   const [openIndex, setOpenIndex] = useState(0);
   return (
     <div className="w-[50%] m-auto mt-5">
@@ -25,6 +26,7 @@ const Accordion = () => {
           key={index}
           title={item.title}
           body={item.body}
+          // isOpen will open only that accordian item whose index is equal to openIndex
           isOpen={index === openIndex ? true : false}
           setIsOpen={() => {
             index === openIndex ? setOpenIndex(null) : setOpenIndex(index);

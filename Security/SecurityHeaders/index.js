@@ -14,9 +14,15 @@ app.use(redirectToHttps);
 
 
 app.use((req, res, next) => {
+  // The Referer HTTP request header contains the absolute or partial address from which a resource has been requested. The Referer header allows a server to identify referring pages that people are visiting from
   res.setHeader('Referrer-Policy', 'no-referrer');
+
+  // X-Powered-By header tells which server is being used. It is a security risk to tell the server name because it can be used by hackers to exploit the server if a server has some vulnerability.
   res.removeHeader('X-Powered-By');
+
+  // This is not important.
   res.setHeader('X-Content-Type-Options', 'nosniff');
+  
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   next();
 });

@@ -1,6 +1,8 @@
 const CommentBox = ({ data }) => {
   return data.map((comment, index) => (
+    // pl-10 is padding left of 10, border-l-2 is border left of 2px, and Recursion will take care of replies styling as it is calling itself
     <div className=" pl-10 border-l-2 border-black" key={index}>
+    {/* This div is to show content like image, username and comment */}
       <div className="flex">
         <div>
           <img
@@ -14,6 +16,7 @@ const CommentBox = ({ data }) => {
           <p className="px-2">{comment.comment}</p>
         </div>
       </div>
+      {/* If a given comment has replies call the component itself, which is using Recursion */}
       <div>{comment?.replies && <CommentBox data={comment.replies} />}</div>
     </div>
   ));

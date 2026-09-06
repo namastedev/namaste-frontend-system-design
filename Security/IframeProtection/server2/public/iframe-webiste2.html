@@ -12,6 +12,8 @@
         // Malicious JavaScript code in the iframe
         window.onload = function () {
             try {
+                // We are trying to access parent DOM, from child iframe
+                // Modern browsers block this by default, but older browsers allow this
                 const parentWindow = window.parent;
                 const parentDocument = parentWindow.document;
 
