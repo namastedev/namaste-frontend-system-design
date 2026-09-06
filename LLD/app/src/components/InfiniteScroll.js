@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MemeCard } from "./MemeCard";
 import Shimmer from "./Shimmer";
 
-const Body = () => {
+const InfiniteScroll = () => {
   const [memes, setMemes] = useState([]);
   const [showShimmer, setShowShimmer] = useState(false);
 
@@ -42,4 +42,4 @@ const Body = () => {
     </div>
   );
 };
-export default Body;
+export default InfiniteScroll;

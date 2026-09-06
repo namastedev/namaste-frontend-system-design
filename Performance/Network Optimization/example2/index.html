@@ -3,6 +3,7 @@
 <html>
   <head>
     <!-- <link href="./index.css" rel="stylesheet" /> -->
+     <!-- Below we are adding inline CSS to load it in 1st packet itself and to avoid extra network calls -->
     <style>
       .card-wrapper {
         display: flex;
@@ -38,6 +39,9 @@
         opacity: 0.7;
       }
     </style>
+    <!-- <script src="./index.js"></script> -->
+     <!-- Below we are using defer script, which allow to download the JS file in parallel with parsing HTML, and it will not 
+      block HTML parsing. Once it is downloaded it will be executed(Parsed) at the end after HTML parsing is done. -->
     <script defer src="./index.js"></script>
   </head>
   <body>
@@ -45,6 +49,7 @@
     <div class="card-wrapper">
       <div class="card">
         <!-- <img src="./Product1.png" alt="Denim Jeans" style="width: 100%" /> -->
+         <!-- Below we are using SVG image instead of doing extra Network call to bring images -->
         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" viewBox="0 0 512 512" id="add-to-cart"><linearGradient id="a" x1="64.785" x2="438.705" y1="421.699" y2="47.779" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fcc60e"></stop><stop offset="1" stop-color="#e92e29"></stop></linearGradient><path fill="url(#a)" d="M128.924,321.521h288.813c19.206,0,35.795-13.032,40.343-31.69l42.04-172.482
             c0.872-3.578,0.053-7.358-2.222-10.255c-2.275-2.896-5.754-4.587-9.437-4.587h-91.164c-12.942-43.548-53.329-75.403-101.023-75.403
             s-88.081,31.854-101.023,75.403h-93.661L84.906,32.441c-1.288-5.405-6.117-9.22-11.674-9.22H23.538c-6.627,0-12,5.373-12,12

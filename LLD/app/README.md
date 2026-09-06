@@ -1,3 +1,10 @@
+<h1>
+  ChatGpt notes : <a href="https://chatgpt.com/share/6895be50-3858-8006-9451-ca34a7d3d7c3" target="_blank">ChatGPT Notes</a>
+</h1>
+<h1>
+  Common Notes for LLD : <a href="https://heyashu.in/digital-garden/notes/front-end-design-system/low-level-design-component-design" target="_blank">Common Notes</a>
+</h1>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

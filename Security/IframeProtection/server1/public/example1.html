@@ -12,9 +12,10 @@
 
     <button id="overlay-button">Click Me!</button>
     <style>
+      /* Make opacity: 1, if you want to see the positioning of iframe */
         #legit-iframe {
             background-color: #ccc;
-            opacity: 0;
+            opacity: 0; 
             position: absolute;
             top: 0px;
             left: 0;
@@ -25,7 +26,7 @@
     </style>
 
     <script>
-      // Simulate a clickjacking attack by overlaying the button on top of the iframe
+      // Simulate a clickjacking attack by overlaying the button of iframe on top of out main website
       document
         .getElementById("overlay-button")
         .addEventListener("click", () => {

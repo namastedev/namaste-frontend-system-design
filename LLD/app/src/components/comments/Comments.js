@@ -1,5 +1,6 @@
 import CommentBox from "./CommentBox";
 
+// This data has nested replies, which can go upto any level
 const data = [
   {
     username: "Akshay Saini",

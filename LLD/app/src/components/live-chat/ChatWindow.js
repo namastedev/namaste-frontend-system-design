@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import ChatMessage from "./ChatMessage";
 
+// Limit of messages in chat window, after which old messages will be removed
+// This is done to prevent the chat window from getting too large and slowing down the application
+// because if we don't remove old messages, the chat window will keep on increasing in size resulting in a lot of DOM elements
 const CHAT_MESSAGES_LIMIT = 100;
 
+// List of random names
 var nameList = [
   "Time",
   "Past",
@@ -180,14 +184,14 @@ var nameList = [
   "Paradox",
 ];
 
-var finalName = "";
-
+// This function will return RandomNames from above list
 function generateRandomNames() {
-  var finalName = nameList[Math.floor(Math.random() * nameList.length)];
+  const finalName = nameList[Math.floor(Math.random() * nameList.length)];
   return finalName;
 }
 
 const ChatWindow = () => {
+  // State to store messages
   const [messages, setMessages] = useState([]);
 
   const fetchData = () => {
@@ -204,13 +208,16 @@ const ChatWindow = () => {
     ];
 
     setMessages((messages) => {
+      // Add new messages to the existing messages
       let newMessageList = [...data, ...messages];
+      // If the number of messages exceeds the limit, then remove the old messages
       newMessageList = newMessageList.splice(0, CHAT_MESSAGES_LIMIT);
       return newMessageList;
     });
   };
 
   useEffect(() => {
+    // We have done polling here, as youtube chat uses polling to get new messages
     const s = setInterval(fetchData, 1000);
 
     return () => {

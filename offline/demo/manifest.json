@@ -1,4 +1,11 @@
 {
+  "__comment1": "PWA manifest file. This file is used to provide metadata about the web application. This metadata is used by the browser when the web application is installed on the user's device.",
+  "__comment2": "The manifest file provides information about the web application in a JSON text file, necessary for the web app to be downloaded and be presented to the user similarly to a native app.",
+  "__comment3": "MDN Docs is an example of PWA. You can install it on your device and use it as a native app.",
+  "__comment4": "MDN Docs for PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps",
+  "__comment5": "Manifest file properties: https://developer.mozilla.org/en-US/docs/Web/Manifest",
+  "__comment6": "We can generate the manifest file using the different Web App Manifest Generator like: https://app-manifest.firebaseapp.com/",
+  "__comment7": "We can deploy PWA to Play store and App store using the PWA Builder: https://www.pwabuilder.com/ and google has also docs for PWA: https://developers.google.com/web/progressive-web-apps",
   "theme_color": "#8936FF",
   "background_color": "#2EC6FE",
   "icons": [

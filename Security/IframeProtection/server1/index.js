@@ -1,3 +1,5 @@
+// Server 1 is a parent window, which is our main webiste
+
 const express = require('express');
 const app = express();
 

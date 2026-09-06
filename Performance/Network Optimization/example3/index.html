@@ -8,19 +8,36 @@
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <link rel="stylesheet" href="./index.css" />
     <script src="./index.js" defer></script>
+    <!-- Below we are using preconnect, which tells browser that please do the handshake before only and once you encounter the same 
+     origin than skip handshake and start directly downloading the asset. It can be helpful for crossorigin as well. Handshake includes
+     DNS lookup, TCP connection and SSL(secured) connection -->
     <!-- <link rel="preconnect" href="https://cdn.glitch.global" crossorigin /> -->
+
+     <!-- Below we are using dns-prefetch, which tells browser that do the DNS lookup before hand -->
     <!-- <link rel="dns-prefetch" href="https://cdn.glitch.global" crossorigin /> -->
+
+     <!-- Below we are using preload, which tells browser that please download the asset it will be needed in upcoming parsing. 
+      This can be used to download Banners in footer -->
     <!-- <link
       rel="preload"
       href="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-1.jpg?v=1669198400523"
       as="image"
     /> -->
+
+    <!-- Below we are using prefetch, which tells browser please download the resorces which will be needed in near future  -->
+    <!-- <link rel="prefetch" href="/next-page.css" as="style"> -->
+
+    <!-- Below we are using prerender, which tells browser that please download the asset in background which will be needed in near future
+      and store it in cache. This can be next page -->
+    <!-- <link rel="prerender" href="/next-page.html"> -->
+
   </head>
   <body>
     <div class="content">
       <main>
         <div class="gallery">
           <div class="large">
+            <!-- Use fetchPrioroty to download important files first and least important files latter -->
             <img
               src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-1.jpg?v=1669198400523"
               alt="Image 1"
@@ -47,6 +64,7 @@
               class="image"
               fetchPriority="low"
             />
+            <!-- This has fetchPriority as high so it will be downloaded first -->
             <img
               src="https://cdn.glitch.global/db01a8e4-9230-4c5c-977d-85d0e0c3e74c/image-4.jpg?v=1669198402935"
               alt="Image 4"
